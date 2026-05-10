@@ -164,7 +164,6 @@ const handleSubmit = async () => {
                     type="checkbox"
                     checked={entry.enabled}
                     onChange={(e) => updateTool(tool.id, "enabled", e.target.checked)}
-                    aria-label={`Include ${tool.name} in audit`}
                     className="w-4 h-4 accent-blue-600"
                   />
                   <span className="font-semibold text-gray-800">{tool.name}</span>
@@ -175,9 +174,9 @@ const handleSubmit = async () => {
                   <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
                     {/* Plan */}
                     <div>
-                      <label htmlFor={`${tool.id}-plan`} className="block text-xs text-gray-700 font-medium mb-1">Plan</label>
+                      <label htmlFor={`plan-${tool.id}`} className="block text-xs text-gray-700 font-medium mb-1">Plan</label>
                       <select
-                        id={`${tool.id}-plan`}
+                        id={`plan-${tool.id}`}
                         value={entry.plan}
                         onChange={(e) => updateTool(tool.id, "plan", e.target.value)}
                         className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -190,9 +189,9 @@ const handleSubmit = async () => {
 
                     {/* Monthly Spend */}
                     <div>
-                      <label htmlFor={`${tool.id}-spend`} className="block text-xs text-gray-700 font-medium mb-1">Monthly spend ($)</label>
+                      <label htmlFor={`spend-${tool.id}`} className="block text-xs text-gray-700 font-medium mb-1">Monthly spend ($)</label>
                       <input
-                        id={`${tool.id}-spend`}
+                        id={`spend-${tool.id}`}
                         type="number"
                         min="0"
                         placeholder="e.g. 40"
@@ -204,9 +203,9 @@ const handleSubmit = async () => {
 
                     {/* Seats */}
                     <div>
-                      <label htmlFor={`${tool.id}-seats`} className="block text-xs text-gray-700 font-medium mb-1">Number of seats</label>
+                      <label htmlFor={`seats-${tool.id}`} className="block text-xs text-gray-700 font-medium mb-1">Number of seats</label>
                       <input
-                        id={`${tool.id}-seats`}
+                        id={`seats-${tool.id}`}
                         type="number"
                         min="1"
                         placeholder="e.g. 3"

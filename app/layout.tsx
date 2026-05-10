@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   description:
     "Free instant audit of your AI tool spend. Find overspending, get recommendations, and see how much you could save monthly.",
 };
-
+<a href="https://credex.rocks" target="_blank" rel="noopener noreferrer"></a>
 export default function RootLayout({
   children,
 }: Readonly<{
