@@ -1,5 +1,8 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+import { runAudit } from "@/lib/auditEngine";
+
 import { useState, useEffect } from "react";
 
 const TOOLS = [
@@ -72,6 +75,7 @@ const defaultFormState = (): FormState => ({
 });
 
 export default function Home() {
+  const router = useRouter();
   const [form, setForm] = useState<FormState>(defaultFormState());
 
   // Load from localStorage on first render
@@ -100,16 +104,20 @@ export default function Home() {
   };
 
   const handleSubmit = () => {
-    const enabledTools = Object.entries(form.tools).filter(
-      ([_, t]) => t.enabled
-    );
+    const enabledTools = Object.entries(form.tools).filter(([_, t]) => t.enabled);
     if (enabledTools.length === 0) {
       alert("Please select at least one AI tool you're paying for.");
       return;
     }
-    // Audit engine will go here tomorrow
-    console.log("Form submitted:", form);
-    alert("Form submitted! Audit engine coming tomorrow.");
+  
+    const auditResult = runAudit(form.tools, form.teamSize, form.useCase);
+  
+    // Store result in localStorage for now (Day 3 we'll move this to Supabase)
+    const auditId = crypto.randomUUID();
+    localStorage.setItem(`audit_${auditId}`, JSON.stringify(auditResult));
+  
+    // Redirect to results page
+    router.push(`/audit/${auditId}`);
   };
 
   return (
