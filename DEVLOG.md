@@ -33,3 +33,15 @@
 **Blockers / what I'm stuck on:** ...
 
 **Plan for tomorrow:** Add Anthropic API summary, lead capture form, and transactional email via Resend.
+
+## Day 4 — 2025-05-11
+
+**Hours worked:** 5
+
+**What I did:** Got Anthropic API key and installed SDK. Built /api/summary route with Claude generating personalised 80-100 word summaries. Added skeleton loader for summary on results page. Built /api/leads route saving to Supabase and sending email via Resend. Built lead capture form with honeypot abuse protection. Tested full flow including email delivery.
+
+**What I learned:** ...
+
+**Blockers / what I'm stuck on:** ...
+
+**Plan for tomorrow:** Write tests for audit engine, set up GitHub Actions CI, polish UI for Lighthouse scores.
