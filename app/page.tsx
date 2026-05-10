@@ -103,22 +103,39 @@ export default function Home() {
     }));
   };
 
-  const handleSubmit = () => {
-    const enabledTools = Object.entries(form.tools).filter(([_, t]) => t.enabled);
-    if (enabledTools.length === 0) {
-      alert("Please select at least one AI tool you're paying for.");
-      return;
-    }
-  
-    const auditResult = runAudit(form.tools, form.teamSize, form.useCase);
-  
-    // Store result in localStorage for now (Day 3 we'll move this to Supabase)
-    const auditId = crypto.randomUUID();
-    localStorage.setItem(`audit_${auditId}`, JSON.stringify(auditResult));
-  
-    // Redirect to results page
+  const [isLoading, setIsLoading] = useState(false);
+
+const handleSubmit = async () => {
+  const enabledTools = Object.entries(form.tools).filter(
+    ([_, t]) => t.enabled
+  );
+  if (enabledTools.length === 0) {
+    alert("Please select at least one AI tool you're paying for.");
+    return;
+  }
+
+  setIsLoading(true);
+  try {
+    const res = await fetch("/api/audit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
+    });
+
+    const { auditId, error } = await res.json();
+    if (error) throw new Error(error);
+
+    // Clear localStorage audit cache (now stored in DB)
+    localStorage.removeItem("auditForm");
+
     router.push(`/audit/${auditId}`);
-  };
+  } catch (err) {
+    alert("Something went wrong. Please try again.");
+    console.error(err);
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   return (
     <main className="min-h-screen bg-gray-50 py-10 px-4">
@@ -233,11 +250,12 @@ export default function Home() {
 
         {/* Submit */}
         <button
-          onClick={handleSubmit}
-          className="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition-colors text-lg"
-        >
-          Run My Free Audit →
-        </button>
+  onClick={handleSubmit}
+  disabled={isLoading}
+  className="mt-6 w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white font-semibold py-3 rounded-xl transition-colors text-lg"
+>
+  {isLoading ? "Running audit..." : "Run My Free Audit →"}
+</button>
 
         <p className="text-center text-xs text-gray-400 mt-3">
           No login required. Your data is not shared.
