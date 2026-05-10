@@ -43,7 +43,7 @@ export default function AuditSummary({
         AI-Generated Summary
       </p>
       {loading ? (
-        <div className="space-y-2 animate-pulse">
+        <div className="space-y-2 animate-pulse" role="status" aria-label="Generating AI summary...">
           <div className="h-4 bg-gray-200 rounded w-full" />
           <div className="h-4 bg-gray-200 rounded w-5/6" />
           <div className="h-4 bg-gray-200 rounded w-4/6" />

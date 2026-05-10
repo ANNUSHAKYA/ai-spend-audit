@@ -142,7 +142,7 @@ const handleSubmit = async () => {
           <h1 className="text-3xl font-bold text-gray-900">
             AI Spend Audit
           </h1>
-          <p className="mt-2 text-gray-500">
+          <p className="mt-2 text-gray-700 font-medium">
             Find out where you&apos;re overspending on AI tools — free, instant, no login required.
           </p>
         </div>
@@ -164,6 +164,7 @@ const handleSubmit = async () => {
                     type="checkbox"
                     checked={entry.enabled}
                     onChange={(e) => updateTool(tool.id, "enabled", e.target.checked)}
+                    aria-label={`Include ${tool.name} in audit`}
                     className="w-4 h-4 accent-blue-600"
                   />
                   <span className="font-semibold text-gray-800">{tool.name}</span>
@@ -174,8 +175,9 @@ const handleSubmit = async () => {
                   <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
                     {/* Plan */}
                     <div>
-                      <label className="block text-xs text-gray-500 mb-1">Plan</label>
+                      <label htmlFor={`${tool.id}-plan`} className="block text-xs text-gray-700 font-medium mb-1">Plan</label>
                       <select
+                        id={`${tool.id}-plan`}
                         value={entry.plan}
                         onChange={(e) => updateTool(tool.id, "plan", e.target.value)}
                         className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -188,8 +190,9 @@ const handleSubmit = async () => {
 
                     {/* Monthly Spend */}
                     <div>
-                      <label className="block text-xs text-gray-500 mb-1">Monthly spend ($)</label>
+                      <label htmlFor={`${tool.id}-spend`} className="block text-xs text-gray-700 font-medium mb-1">Monthly spend ($)</label>
                       <input
+                        id={`${tool.id}-spend`}
                         type="number"
                         min="0"
                         placeholder="e.g. 40"
@@ -201,8 +204,9 @@ const handleSubmit = async () => {
 
                     {/* Seats */}
                     <div>
-                      <label className="block text-xs text-gray-500 mb-1">Number of seats</label>
+                      <label htmlFor={`${tool.id}-seats`} className="block text-xs text-gray-700 font-medium mb-1">Number of seats</label>
                       <input
+                        id={`${tool.id}-seats`}
                         type="number"
                         min="1"
                         placeholder="e.g. 3"
@@ -221,8 +225,9 @@ const handleSubmit = async () => {
         {/* Team info */}
         <div className="mt-6 bg-white rounded-xl border border-gray-200 p-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs text-gray-500 mb-1">Team size</label>
+            <label htmlFor="teamSize" className="block text-xs text-gray-700 font-medium mb-1">Team size</label>
             <input
+              id="teamSize"
               type="number"
               min="1"
               placeholder="e.g. 5"
@@ -232,8 +237,9 @@ const handleSubmit = async () => {
             />
           </div>
           <div>
-            <label className="block text-xs text-gray-500 mb-1">Primary use case</label>
+            <label htmlFor="useCase" className="block text-xs text-gray-700 font-medium mb-1">Primary use case</label>
             <select
+              id="useCase"
               value={form.useCase}
               onChange={(e) => setForm((p) => ({ ...p, useCase: e.target.value }))}
               className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -254,7 +260,7 @@ const handleSubmit = async () => {
   {isLoading ? "Running audit..." : "Run My Free Audit →"}
 </button>
 
-        <p className="text-center text-xs text-gray-400 mt-3">
+        <p className="text-center text-xs text-gray-600 font-medium mt-3">
           No login required. Your data is not shared.
         </p>
       </div>

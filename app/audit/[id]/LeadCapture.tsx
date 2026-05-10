@@ -64,7 +64,7 @@ export default function LeadCapture({ auditId, totalMonthly }: Props) {
       <h3 className="font-bold text-gray-900 text-lg mb-1">
         Get this report by email
       </h3>
-      <p className="text-gray-500 text-sm mb-4">
+      <p className="text-gray-700 text-sm mb-4 font-medium">
         We&apos;ll send you the full breakdown. No spam, ever.
       </p>
 
@@ -81,30 +81,42 @@ export default function LeadCapture({ auditId, totalMonthly }: Props) {
         />
 
         {/* Email — required */}
-        <input
-          type="email"
-          placeholder="your@email.com"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
-        />
+        <div>
+          <label htmlFor="lead-email" className="sr-only">Email address</label>
+          <input
+            id="lead-email"
+            type="email"
+            placeholder="your@email.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+        </div>
 
         {/* Optional fields */}
         <div className="grid grid-cols-2 gap-3">
-          <input
-            type="text"
-            placeholder="Company name (optional)"
-            value={companyName}
-            onChange={(e) => setCompanyName(e.target.value)}
-            className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
-          />
-          <input
-            type="text"
-            placeholder="Your role (optional)"
-            value={role}
-            onChange={(e) => setRole(e.target.value)}
-            className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
-          />
+          <div>
+            <label htmlFor="lead-company" className="sr-only">Company name (optional)</label>
+            <input
+              id="lead-company"
+              type="text"
+              placeholder="Company name (optional)"
+              value={companyName}
+              onChange={(e) => setCompanyName(e.target.value)}
+              className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
+          </div>
+          <div>
+            <label htmlFor="lead-role" className="sr-only">Your role (optional)</label>
+            <input
+              id="lead-role"
+              type="text"
+              placeholder="Your role (optional)"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+              className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
+          </div>
         </div>
 
         {error && <p className="text-red-500 text-sm">{error}</p>}
@@ -117,7 +129,7 @@ export default function LeadCapture({ auditId, totalMonthly }: Props) {
           {loading ? "Sending..." : "Send me the report →"}
         </button>
 
-        <p className="text-xs text-gray-400 text-center">
+        <p className="text-xs text-gray-600 text-center font-medium">
           {totalMonthly > 500
             ? "High-savings accounts will be contacted by Credex within 2 business days."
             : "We'll notify you when new optimisations apply to your stack."}

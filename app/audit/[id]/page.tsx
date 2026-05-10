@@ -61,7 +61,7 @@ export default async function AuditPage({
         {/* Header */}
         <div className="mb-6">
           <h1 className="text-2xl font-bold text-gray-900">Your AI Spend Audit</h1>
-          <p className="text-gray-500 text-sm mt-1">
+          <p className="text-gray-700 font-medium text-sm mt-1">
             Based on your current tools and plans
           </p>
         </div>
@@ -107,7 +107,7 @@ export default async function AuditPage({
                     </span>
                   )}
                 </div>
-                <p className="text-sm text-gray-500">{r.reason}</p>
+                <p className="text-sm text-gray-700 font-medium">{r.reason}</p>
                 {!r.isOptimal && (
                   <p className="text-sm text-blue-700 font-medium mt-1">
                     → {r.recommendedAction}
@@ -115,7 +115,7 @@ export default async function AuditPage({
                 )}
               </div>
               <div className="text-right shrink-0">
-                <p className="text-xs text-gray-400">Current</p>
+                <p className="text-xs text-gray-600 font-bold uppercase tracking-tight">Current</p>
                 <p className="font-bold text-gray-800">${r.currentSpend}/mo</p>
                 {r.savings > 0 && (
                   <p className="text-green-600 font-bold text-sm mt-1">
@@ -170,7 +170,7 @@ export default async function AuditPage({
           <p className="text-gray-700 font-semibold mb-2">
             Share this audit
           </p>
-          <p className="text-gray-400 text-xs mb-3">
+          <p className="text-gray-600 text-xs mb-3 font-medium">
             Your email and company name are never included in the public link.
           </p>
           <ShareButton />
