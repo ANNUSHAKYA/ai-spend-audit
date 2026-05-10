@@ -4,11 +4,12 @@ import type { AuditResult } from "@/lib/auditEngine";
 import ShareButton from "./ShareButton";
 
 // OG tags for shareable previews
-export async function generateMetadata({ params }: { params: { id: string } }) {
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const { data } = await supabase
     .from("audits")
     .select("total_monthly_savings")
-    .eq("id", params.id)
+    .eq("id", id)
     .single();
 
   const savings = data?.total_monthly_savings ?? 0;
@@ -19,7 +20,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
     openGraph: {
       title: `AI Spend Audit — Save $${savings}/mo`,
       description: `This startup could save $${savings}/mo on AI tools. Get your free audit.`,
-      url: `https://ai-spend-audit-irw9lmqnl-annushakya94526-7755s-projects.vercel.app//audit/${params.id}`,
+      url: `https://ai-spend-audit-irw9lmqnl-annushakya94526-7755s-projects.vercel.app//audit/${id}`,
     },
     twitter: {
       card: "summary_large_image",
@@ -32,13 +33,15 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
 export default async function AuditPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
+  const { id } = await params;
+
   // Fetch audit from Supabase
   const { data, error } = await supabase
     .from("audits")
     .select("*")
-    .eq("id", params.id)
+    .eq("id", id)
     .single();
 
   if (error || !data) return notFound();
