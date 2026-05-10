@@ -1,3 +1,5 @@
+import LeadCapture from "./LeadCapture";
+import AuditSummary from "./AuditSummary";
 import { supabase } from "@/lib/supabase";
 import { notFound } from "next/navigation";
 import type { AuditResult } from "@/lib/auditEngine";
@@ -76,6 +78,15 @@ export default async function AuditPage({
           </p>
         </div>
 
+        {/* AI Summary */}
+<AuditSummary
+  results={results}
+  totalMonthly={totalMonthly}
+  totalAnnual={totalAnnual}
+  useCase={data.use_case}
+  teamSize={data.team_size}
+/>
+
         {/* Per-tool breakdown */}
         <h2 className="text-lg font-semibold text-gray-800 mb-3">
           Tool-by-tool breakdown
@@ -149,6 +160,9 @@ export default async function AuditPage({
             </a>
           </div>
         )}
+
+        {/* Lead capture — shown after value, never before */}
+        <LeadCapture auditId={(await params).id} totalMonthly={totalMonthly} />
 
         {/* Share section */}
         <div className="bg-white border border-gray-200 rounded-xl p-5 text-center">
