@@ -35,7 +35,7 @@ export default function AuditSummary({
         )
       )
       .finally(() => setLoading(false));
-  }, []);
+  }, [results, totalMonthly, totalAnnual, useCase, teamSize]);
 
   return (
     <div className="bg-white border border-gray-200 rounded-xl p-5 mb-6">

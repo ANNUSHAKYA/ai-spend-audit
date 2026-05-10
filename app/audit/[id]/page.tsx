@@ -4,6 +4,7 @@ import { supabase } from "@/lib/supabase";
 import { notFound } from "next/navigation";
 import type { AuditResult } from "@/lib/auditEngine";
 import ShareButton from "./ShareButton";
+import Link from "next/link";
 
 // OG tags for shareable previews
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
@@ -130,10 +131,10 @@ export default async function AuditPage({
         {alreadyOptimal && (
           <div className="bg-green-50 border border-green-200 rounded-xl p-5 text-center mb-6">
             <p className="text-green-800 font-bold text-lg">
-              You're spending well 👍
+              You&apos;re spending well 👍
             </p>
             <p className="text-green-700 text-sm mt-1">
-              Your current AI stack looks well optimised. We'll notify you when
+              Your current AI stack looks well optimised. we&apos;ll notify you when
               better options apply to your stack.
             </p>
           </div>
@@ -177,9 +178,9 @@ export default async function AuditPage({
 
         {/* Back link */}
         <div className="text-center mt-6">
-          <a href="/" className="text-blue-600 text-sm hover:underline">
+          <Link href="/" className="text-blue-600 text-sm hover:underline">
             ← Run a new audit
-          </a>
+          </Link>
         </div>
       </div>
     </main>

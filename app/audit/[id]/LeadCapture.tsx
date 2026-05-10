@@ -51,7 +51,7 @@ export default function LeadCapture({ auditId, totalMonthly }: Props) {
       <div className="bg-green-50 border border-green-200 rounded-xl p-6 text-center mb-6">
         <p className="text-green-800 font-bold text-lg">Report sent! ✓</p>
         <p className="text-green-700 text-sm mt-1">
-          Check your inbox — we've sent your full audit report.
+          Check your inbox — we&apos;ve sent your full audit report.
           {totalMonthly > 500 &&
             " Our team will reach out within 2 business days."}
         </p>
@@ -65,7 +65,7 @@ export default function LeadCapture({ auditId, totalMonthly }: Props) {
         Get this report by email
       </h3>
       <p className="text-gray-500 text-sm mb-4">
-        We'll send you the full breakdown. No spam, ever.
+        We&apos;ll send you the full breakdown. No spam, ever.
       </p>
 
       <div className="space-y-3">

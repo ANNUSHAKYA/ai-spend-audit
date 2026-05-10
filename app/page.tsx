@@ -1,7 +1,6 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { runAudit } from "@/lib/auditEngine";
 
 import { useState, useEffect } from "react";
 
@@ -76,17 +75,15 @@ const defaultFormState = (): FormState => ({
 
 export default function Home() {
   const router = useRouter();
-  const [form, setForm] = useState<FormState>(defaultFormState());
-
-  // Load from localStorage on first render
-  useEffect(() => {
-    const saved = localStorage.getItem("auditForm");
-    if (saved) {
-      try {
-        setForm(JSON.parse(saved));
-      } catch {}
+  const [form, setForm] = useState<FormState>(() => {
+    if (typeof window === "undefined") return defaultFormState();
+    try {
+      const saved = localStorage.getItem("auditForm");
+      return saved ? JSON.parse(saved) : defaultFormState();
+    } catch {
+      return defaultFormState();
     }
-  }, []);
+  });
 
   // Save to localStorage whenever form changes
   useEffect(() => {
@@ -107,7 +104,7 @@ export default function Home() {
 
 const handleSubmit = async () => {
   const enabledTools = Object.entries(form.tools).filter(
-    ([_, t]) => t.enabled
+    ([, t]) => t.enabled
   );
   if (enabledTools.length === 0) {
     alert("Please select at least one AI tool you're paying for.");
@@ -146,7 +143,7 @@ const handleSubmit = async () => {
             AI Spend Audit
           </h1>
           <p className="mt-2 text-gray-500">
-            Find out where you're overspending on AI tools — free, instant, no login required.
+            Find out where you&apos;re overspending on AI tools — free, instant, no login required.
           </p>
         </div>
 
