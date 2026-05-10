@@ -21,3 +21,15 @@
 **Blockers / what I'm stuck on:** ...
 
 **Plan for tomorrow:** Move audit storage to Supabase, build proper results page UI, add shareable URLs with OG tags.
+
+## Day 3 — 2025-05-10
+
+**Hours worked:** 5
+
+**What I did:** Created Supabase project and set up audits + leads tables. Built /api/audit POST route. Updated form to call the API instead of localStorage. Rebuilt results page as a server component with proper OG tags and shareable URLs. Tested full flow locally and on Vercel.
+
+**What I learned:** ...
+
+**Blockers / what I'm stuck on:** ...
+
+**Plan for tomorrow:** Add Anthropic API summary, lead capture form, and transactional email via Resend.
