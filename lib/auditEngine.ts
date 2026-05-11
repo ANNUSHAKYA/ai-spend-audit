@@ -40,7 +40,7 @@ function auditCursor(entry: ToolEntry): AuditResult {
         const recommendedCost = seats * 20; // Pro plan
         savings = currentCost - recommendedCost;
         recommendedAction = `Downgrade to Cursor Pro ($20/seat)`;
-        reason = `Cursor Business adds admin controls and SSO — unnecessary for teams under 3. Pro covers the same AI features.`;
+        reason = `Cursor Business ($40/seat) adds SSO and admin controls only useful at 10+ seats. At ${seats} seat${seats === 1 ? '' : 's'}, Pro ($20/seat) covers identical AI features — saving $${savings}/mo with zero capability loss.`;
         isOptimal = false;
     }
 
@@ -48,7 +48,7 @@ function auditCursor(entry: ToolEntry): AuditResult {
     if (plan === "Enterprise" && seats < 50) {
         savings = monthlySpend * 0.4; // rough 40% estimate since enterprise is custom
         recommendedAction = "Downgrade to Cursor Business";
-        reason = `Enterprise pricing is negotiated and typically 40%+ above Business. For teams under 50, Business covers all core features.`;
+        reason = `Cursor Enterprise is custom-negotiated and typically runs 40%+ above Business. For ${seats} seats, Business ($40/seat) covers all core AI features — estimated saving $${Math.round(savings)}/mo.`;
         isOptimal = false;
     }
 
@@ -73,7 +73,7 @@ function auditGithubCopilot(entry: ToolEntry, useCase: string): AuditResult {
     if (useCase !== "Coding" && useCase !== "Mixed") {
         savings = monthlySpend;
         recommendedAction = "Consider cancelling GitHub Copilot";
-        reason = `Copilot is purpose-built for coding. For ${useCase.toLowerCase()} use cases, Claude Pro or ChatGPT Plus gives better value.`;
+        reason = `GitHub Copilot is purpose-built for coding IDEs. For ${useCase.toLowerCase()} workflows it has no relevant features — you're paying $${monthlySpend}/mo for a tool your team won't open. Claude Pro ($20/mo) or ChatGPT Plus ($20/mo) are far better fits.`;
         isOptimal = false;
     }
 
@@ -81,7 +81,7 @@ function auditGithubCopilot(entry: ToolEntry, useCase: string): AuditResult {
     if (plan === "Business" && seats === 1) {
         savings = 9; // $19 - $10
         recommendedAction = "Downgrade to GitHub Copilot Individual ($10/mo)";
-        reason = `Business adds policy management and audit logs — only needed for teams. Solo developers get identical AI features on Individual.`;
+        reason = `Copilot Business ($19/mo) adds policy management, org-wide audit logs, and IP indemnity — none of which apply to a solo developer. Individual ($10/mo) gives identical AI code completions, saving $9/mo.`;
         isOptimal = false;
     }
 
@@ -91,7 +91,7 @@ function auditGithubCopilot(entry: ToolEntry, useCase: string): AuditResult {
         const recommendedCost = seats * 19;
         savings = currentCost - recommendedCost;
         recommendedAction = `Downgrade to GitHub Copilot Business ($19/seat)`;
-        reason = `Enterprise adds SAML SSO and custom policies. For teams under 20, Business covers all AI coding features at half the cost.`;
+        reason = `Copilot Enterprise ($39/seat) adds custom SAML SSO, knowledge bases, and GitHub.com Copilot Chat — only worth it at 20+ seats. For ${seats} seats, Business ($19/seat) has identical AI features, saving $${savings}/mo.`;
         isOptimal = false;
     }
 
@@ -118,7 +118,7 @@ function auditClaude(entry: ToolEntry, useCase: string): AuditResult {
         const recommendedCost = seats * 20; // Pro per person
         savings = currentCost - recommendedCost;
         recommendedAction = `Switch each user to Claude Pro ($20/user/mo)`;
-        reason = `Claude Team requires a 5-seat minimum but charges per seat. For teams under 5, individual Pro plans cost less with the same capability.`;
+        reason = `Claude Team requires a 5-seat minimum ($30/seat) but you have ${seats} seats — you're paying the minimum overage. ${seats} individual Claude Pro plans at $20/seat would cost $${recommendedCost}/mo vs your current $${currentCost}/mo, saving $${savings}/mo for identical model access.`;
         isOptimal = false;
     }
 
@@ -126,14 +126,14 @@ function auditClaude(entry: ToolEntry, useCase: string): AuditResult {
     if (plan === "Max" && useCase !== "Coding" && useCase !== "Research") {
         savings = 80; // Max vs Pro = $100 - $20
         recommendedAction = "Downgrade to Claude Pro ($20/mo)";
-        reason = `Claude Max is designed for users hitting Pro's limits daily. For ${useCase.toLowerCase()} workflows, Pro's limits are rarely reached.`;
+        reason = `Claude Max ($100/mo) unlocks 5x more usage than Pro and is designed for users who hit Pro's daily limits. For ${useCase.toLowerCase()} workflows, Pro's limits are rarely reached — downgrading saves $80/mo with no practical impact.`;
         isOptimal = false;
     }
 
     // API Direct — if low usage, a flat plan may be cheaper
     if (plan === "API Direct" && monthlySpend < 20) {
         savings = 0; // API is pay-as-you-go, low spend is fine
-        reason = "API direct at low usage is the most cost-efficient option.";
+        reason = `At $${monthlySpend}/mo, pay-as-you-go API is the correct model for your usage level. A flat Pro plan ($20/mo) would only make sense above that threshold.`;
         isOptimal = true;
     }
 
@@ -158,7 +158,7 @@ function auditChatGPT(entry: ToolEntry, useCase: string): AuditResult {
     if (plan === "Team" && seats === 1) {
         savings = 10;
         recommendedAction = "Downgrade to ChatGPT Plus ($20/mo)";
-        reason = `ChatGPT Team adds collaborative workspaces and admin controls. Solo users get identical model access on Plus at $10/mo less.`;
+        reason = `ChatGPT Team ($30/seat) adds shared workspaces and admin controls — irrelevant for a single user. ChatGPT Plus ($20/mo) gives identical GPT-4o access, saving $10/mo immediately.`;
         isOptimal = false;
     }
 
@@ -169,7 +169,7 @@ function auditChatGPT(entry: ToolEntry, useCase: string): AuditResult {
     ) {
         savings = monthlySpend * 0.5;
         recommendedAction = "Consider consolidating: Cursor already includes GPT-4 class models";
-        reason = `For coding-focused teams, Cursor Pro includes similar model access. Running both creates redundant spend — audit if both are actively used.`;
+        reason = `For coding-focused teams, Cursor Pro already bundles GPT-4 class model access. Paying $${monthlySpend}/mo for ChatGPT on top is likely redundant unless your team actively uses both for different tasks — audit usage logs before renewing.`;
         isOptimal = false;
     }
 
@@ -194,7 +194,7 @@ function auditAnthropicAPI(entry: ToolEntry): AuditResult {
     if (monthlySpend > 200) {
         savings = monthlySpend * 0.35;
         recommendedAction = "Audit model selection — switch heavy tasks to claude-haiku-3-5";
-        reason = `At $${monthlySpend}/mo, model selection matters. Claude Haiku is ~20x cheaper than Sonnet for tasks that don't need top capability (summarisation, classification, extraction).`;
+        reason = `At $${monthlySpend}/mo, model routing is your highest-leverage cost lever. Claude Haiku 3.5 costs ~20x less than Sonnet per token and matches Sonnet on tasks like summarisation, classification, and extraction. Routing just 50% of calls to Haiku could save ~$${Math.round(savings)}/mo.`;
         isOptimal = false;
     }
 
@@ -218,7 +218,7 @@ function auditOpenAIAPI(entry: ToolEntry): AuditResult {
     if (monthlySpend > 200) {
         savings = monthlySpend * 0.3;
         recommendedAction = "Audit model selection — use gpt-4o-mini for lighter tasks";
-        reason = `GPT-4o-mini is ~15x cheaper than GPT-4o. For tasks like summarisation, extraction, or classification, it performs comparably.`;
+        reason = `GPT-4o-mini costs ~15x less per token than GPT-4o and matches it on tasks like summarisation, extraction, and classification. At $${monthlySpend}/mo, routing even 40% of calls to gpt-4o-mini could save ~$${Math.round(savings)}/mo without meaningful quality loss.`;
         isOptimal = false;
     }
 
@@ -226,7 +226,7 @@ function auditOpenAIAPI(entry: ToolEntry): AuditResult {
     if (monthlySpend > 500) {
         savings = monthlySpend * 0.4;
         recommendedAction = "Benchmark Anthropic API — often 30–40% cheaper for equivalent output";
-        reason = `At this spend level, a provider benchmark is worth running. Anthropic's Claude Haiku and Sonnet often outperform GPT-4o-mini on quality/cost for text tasks.`;
+        reason = `At $${monthlySpend}/mo, a provider benchmark is worth running. Anthropic Claude Haiku 3.5 and Sonnet frequently outperform GPT-4o-mini on quality-per-dollar for text tasks. A 30-day parallel test has produced 30–40% cost reductions for similar workloads.`;
         isOptimal = false;
     }
 
@@ -251,7 +251,7 @@ function auditGemini(entry: ToolEntry): AuditResult {
     if (plan === "Ultra") {
         savings = 200;
         recommendedAction = "Compare with Claude Max ($100/mo) or ChatGPT Plus ($20/mo)";
-        reason = `Gemini Ultra at $300/mo is the most expensive consumer AI plan. Claude Max and ChatGPT Plus offer comparable capability at 60–90% lower cost.`;
+        reason = `Gemini Ultra at $300/mo is the most expensive consumer AI subscription available. Claude Max ($100/mo) and ChatGPT Plus ($20/mo) offer comparable capability for most workflows — you could save $200/mo switching to Claude Max or $280/mo switching to ChatGPT Plus.`;
         isOptimal = false;
     }
 
@@ -276,7 +276,7 @@ function auditWindsurf(entry: ToolEntry, useCase: string): AuditResult {
     if (useCase !== "Coding" && useCase !== "Mixed") {
         savings = monthlySpend;
         recommendedAction = "Cancel Windsurf — wrong tool for your use case";
-        reason = `Windsurf is a coding-only IDE. For ${useCase.toLowerCase()} workflows, Claude Pro or ChatGPT Plus is far more appropriate.`;
+        reason = `Windsurf is an AI coding IDE — it only delivers value inside a code editor. For ${useCase.toLowerCase()} workflows, you're paying $${monthlySpend}/mo for a tool that doesn't fit the job. Cancel and redirect that budget to Claude Pro or ChatGPT Plus.`;
         isOptimal = false;
     }
 
@@ -286,7 +286,7 @@ function auditWindsurf(entry: ToolEntry, useCase: string): AuditResult {
         const recommendedCost = seats * 15;
         savings = currentCost - recommendedCost;
         recommendedAction = `Switch to Windsurf Pro ($15/seat) — saves $${savings}/mo`;
-        reason = `Windsurf Team adds SSO and centralised billing. For teams under 3, Pro gives identical AI features at less than half the price.`;
+        reason = `Windsurf Team ($35/seat) adds SSO and centralised billing — governance features only worth paying for at 5+ seats. At ${seats} seats, Pro ($15/seat) gives identical AI completions and model access, saving $${savings}/mo.`;
         isOptimal = false;
     }
 
