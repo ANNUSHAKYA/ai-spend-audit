@@ -12,12 +12,16 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "AI Spend Audit — Find where you're overspending on AI tools",
-  description:
-    "Free instant audit of your AI tool spend. Find overspending, get recommendations, and see how much you could save monthly.",
+export const metadata = {
+  title: "AI Spend Audit",
+  description: "Find where you're overspending on AI tools — free and instant.",
 };
-<a href="https://credex.rocks" target="_blank" rel="noopener noreferrer"></a>
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
