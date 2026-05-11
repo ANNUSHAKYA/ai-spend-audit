@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Spend Audit
 
-## Getting Started
+Free instant audit of your AI tool spend. Built for 
+startup founders and engineering managers who suspect 
+they're overpaying for Cursor, Claude, ChatGPT, or 
+GitHub Copilot — but haven't done the math yet.
 
-First, run the development server:
+**Live URL:** https://ai-spend-audit-sigma.vercel.app/
 
+---
+
+## Screenshots
+
+[Embed 3 screenshots here]
+
+To add screenshots:
+1. Take them from your live Vercel URL
+2. Drag them into a GitHub issue to get an image URL
+3. Paste the URL here as: ![description](url)
+
+Screenshot 1: The spend input form
+Screenshot 2: Audit results page with savings hero number
+Screenshot 3: Lead capture form / email confirmation
+
+<img width="1440" height="900" alt="Image" src="https://github.com/user-attachments/assets/0efa8356-c602-40ff-b2e1-36d41f8ab2fd" />
+
+<img width="1440" height="900" alt="Image" src="https://github.com/user-attachments/assets/36223d7e-aaf8-4a7a-b92c-9a7102fcab00" />
+
+<img width="1440" height="900" alt="Image" src="https://github.com/user-attachments/assets/a454bc99-ec08-41f9-8c23-d76019571038" />
+
+Or link a Loom/YouTube screen recording (30 seconds):
+[Watch 30-second demo](https://loom.com/your-link)
+
+---
+
+## Quick Start
+
+### Run locally
 ```bash
+git clone https://github.com/yourname/ai-spend-audit
+cd ai-spend-audit
+npm install
+cp .env.example .env.local
+# Fill in your keys in .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Environment variables needed
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+ANTHROPIC_API_KEY=your_anthropic_api_key
+RESEND_API_KEY=your_resend_api_key
+NEXT_PUBLIC_APP_URL=https://your-app.vercel.app
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Run tests
+```bash
+npm test
+```
 
-## Learn More
+### Deploy
+Push to main — Vercel auto-deploys.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Decisions
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**1. Next.js App Router over Pages Router**
+Server components let the audit result page fetch 
+data on the server — faster initial load, better SEO, 
+and Open Graph tags that actually work for sharing.
 
-## Deploy on Vercel
+**2. Hardcoded rules for audit logic, not AI**
+The audit engine uses deterministic TypeScript rules, 
+not an LLM. A finance person reading the savings 
+reasoning needs to agree with it — AI-generated 
+explanations are often vague or wrong on specifics. 
+The AI is used only for the personalised summary 
+paragraph where fluency matters more than precision.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**3. Supabase over Firebase**
+Supabase gives a real Postgres database with Row Level 
+Security. The leads table needs to be write-only from 
+the public side — RLS policies enforce this in one SQL 
+statement. Firebase would require more custom rules.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**4. Email captured after results, never before**
+The assignment required this, but it's also just 
+correct product thinking. Gating value behind email 
+kills conversion. Show the audit first, then offer 
+to send it — users who've already seen savings are 
+far more likely to give their email.
+
+**5. Vitest over Jest**
+Vitest is native to the Vite ecosystem, faster, and 
+requires zero configuration for TypeScript. Jest needs 
+a babel transform setup for ESM imports. For a 
+Next.js + TypeScript project, Vitest is the right call.
