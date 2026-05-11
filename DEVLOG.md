@@ -45,3 +45,15 @@
 **Blockers / what I'm stuck on:** ...
 
 **Plan for tomorrow:** Write tests for audit engine, set up GitHub Actions CI, polish UI for Lighthouse scores.
+
+## Day 5 — 2025-05-12
+
+**Hours worked:** 4
+
+**What I did:** Set up Vitest and wrote 6 tests covering the audit engine — downgrade recommendations, optimal plan detection, Credex threshold, API model optimisation, edge cases, and wrong-tool detection. All pass. Set up GitHub Actions CI — lint and tests run on every push to main, currently green. Ran Lighthouse on live URL and fixed accessibility issues (labels, aria attributes, lang attribute). Scores now above threshold.
+
+**What I learned:** ...
+
+**Blockers / what I'm stuck on:** ...
+
+**Plan for tomorrow:** Write all entrepreneurial files (GTM, ECONOMICS, LANDING_COPY, METRICS) and do 3 real user interviews.
