@@ -70,43 +70,25 @@ export default async function AuditPage({
           </p>
         </div>
 
-        {/* Hero savings block — bigger numbers, pulse animation on load */}
-        <div
-          className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white rounded-3xl p-10 mb-8 text-center shadow-2xl"
-          style={{ boxShadow: "0 20px 60px rgba(37,99,235,0.35)" }}
-        >
-          {/* Decorative circles */}
-          <div className="absolute -top-8 -right-8 w-40 h-40 rounded-full bg-white opacity-5 pointer-events-none" />
-          <div className="absolute -bottom-10 -left-10 w-52 h-52 rounded-full bg-white opacity-5 pointer-events-none" />
-
-          <p className="text-xs uppercase tracking-[0.2em] opacity-70 mb-3 font-semibold">
+        {/* Hero savings block */}
+        <div className="bg-gradient-to-br from-blue-600 to-blue-700 text-white rounded-2xl p-8 mb-6 text-center shadow-lg">
+          <p className="text-sm uppercase tracking-widest opacity-75 mb-1">
             Potential monthly savings
           </p>
-          {/* Big animated savings number */}
-          <p
-            className="text-8xl font-black leading-none tabular-nums"
-            style={{ textShadow: "0 4px 20px rgba(0,0,0,0.2)", animation: "pop 0.5s cubic-bezier(0.34,1.56,0.64,1) both" }}
-          >
+          <p className="text-6xl font-extrabold">
             ${totalMonthly.toFixed(0)}
+            <span className="text-2xl font-normal opacity-75">/mo</span>
           </p>
-          <p className="opacity-80 mt-4 text-xl font-semibold">
-            ${totalAnnual.toFixed(0)}{" "}
-            <span className="opacity-70 font-normal">saved per year</span>
-          </p>
-
-          {/* Divider */}
-          <div className="mt-6 border-t border-white/20 pt-4 flex justify-center gap-8 text-sm">
-            <span className="opacity-70">
-              <span className="font-bold text-white opacity-100">{results.length}</span> tools audited
-            </span>
-            <span className="opacity-70">
-              <span className="font-bold text-white opacity-100">
-                {results.filter((r) => !r.isOptimal).length}
-              </span>{" "}
-              changes recommended
-            </span>
+          <div className="mt-3 inline-block bg-white/20 rounded-full px-4 py-1">
+            <p className="text-sm font-semibold">
+              That&apos;s ${totalAnnual.toFixed(0)} back every year
+            </p>
           </div>
+          <p className="text-xs opacity-60 mt-3">
+            Based on current vendor pricing · Updated May 2026
+          </p>
         </div>
+        
 
         {/* Pop animation keyframe — injected once */}
         <style>{`
