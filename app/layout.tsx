@@ -12,9 +12,9 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "AI Spend Audit",
-  description: "Find where you're overspending on AI tools — free and instant.",
+export const metadata = {
+  title: "SpendLens — Free AI Tool Spend Audit",
+  description: "Find out where you're overspending on Cursor, Claude, ChatGPT, and GitHub Copilot. Free, instant, no login required.",
 };
 
 export const viewport = {
