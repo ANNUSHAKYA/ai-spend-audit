@@ -71,23 +71,23 @@ export default async function AuditPage({
         </div>
 
         {/* Hero savings block */}
-        <div className="bg-gradient-to-br from-blue-600 to-blue-700 text-white rounded-2xl p-8 mb-6 text-center shadow-lg">
-          <p className="text-sm uppercase tracking-widest opacity-75 mb-1">
-            Potential monthly savings
-          </p>
-          <p className="text-6xl font-extrabold">
-            ${totalMonthly.toFixed(0)}
-            <span className="text-2xl font-normal opacity-75">/mo</span>
-          </p>
-          <div className="mt-3 inline-block bg-white/20 rounded-full px-4 py-1">
-            <p className="text-sm font-semibold">
-              That&apos;s ${totalAnnual.toFixed(0)} back every year
-            </p>
-          </div>
-          <p className="text-xs opacity-60 mt-3">
-            Based on current vendor pricing · Updated May 2026
-          </p>
-        </div>
+<div className="bg-gradient-to-br from-blue-600 to-blue-700 text-white rounded-2xl p-8 mb-6 text-center shadow-lg">
+  <p className="text-sm uppercase tracking-widest opacity-75 mb-1">
+    Potential monthly savings
+  </p>
+  <p className="text-6xl font-extrabold">
+    ${totalMonthly.toFixed(0)}
+    <span className="text-2xl font-normal opacity-75">/mo</span>
+  </p>
+  <div className="mt-3 pt-3 border-t border-blue-500">
+    <p className="opacity-90 text-xl font-semibold">
+      ${totalAnnual.toFixed(0)} saved per year
+    </p>
+    <p className="opacity-60 text-sm mt-1">
+      Based on your current plans and team size
+    </p>
+  </div>
+</div>
         
 
         {/* Pop animation keyframe — injected once */}
