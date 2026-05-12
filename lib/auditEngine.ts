@@ -40,7 +40,7 @@ function auditCursor(entry: ToolEntry): AuditResult {
         const recommendedCost = seats * 20; // Pro plan
         savings = currentCost - recommendedCost;
         recommendedAction = `Downgrade to Cursor Pro ($20/seat)`;
-        reason = `Cursor Business ($40/seat) adds SSO and admin controls only useful at 10+ seats. At ${seats} seat${seats === 1 ? '' : 's'}, Pro ($20/seat) covers identical AI features — saving $${savings}/mo with zero capability loss.`;
+        reason = `Cursor Business ($40/seat) adds SSO and centralised billing — only valuable at 5+ seats. At ${seats} seat${seats === 1 ? "" : "s"}, Pro ($20/seat) delivers identical AI features, saving $${savings}/mo with zero capability loss.`;
         isOptimal = false;
     }
 
@@ -81,7 +81,7 @@ function auditGithubCopilot(entry: ToolEntry, useCase: string): AuditResult {
     if (plan === "Business" && seats === 1) {
         savings = 9; // $19 - $10
         recommendedAction = "Downgrade to GitHub Copilot Individual ($10/mo)";
-        reason = `Copilot Business ($19/mo) adds policy management, org-wide audit logs, and IP indemnity — none of which apply to a solo developer. Individual ($10/mo) gives identical AI code completions, saving $9/mo.`;
+        reason = `GitHub Copilot Business ($19/seat) adds audit logs and policy controls — only meaningful for compliance-focused teams of 10+. Individual ($10/seat) provides identical code completion and chat for solo developers, saving $9/mo per seat.`;
         isOptimal = false;
     }
 
@@ -118,7 +118,7 @@ function auditClaude(entry: ToolEntry, useCase: string): AuditResult {
         const recommendedCost = seats * 20; // Pro per person
         savings = currentCost - recommendedCost;
         recommendedAction = `Switch each user to Claude Pro ($20/user/mo)`;
-        reason = `Claude Team requires a 5-seat minimum ($30/seat) but you have ${seats} seats — you're paying the minimum overage. ${seats} individual Claude Pro plans at $20/seat would cost $${recommendedCost}/mo vs your current $${currentCost}/mo, saving $${savings}/mo for identical model access.`;
+        reason = `Claude Team ($30/seat, 5-seat minimum) is designed for collaboration features your team size doesn't need yet. ${seats} individual Pro plans ($20/seat) deliver the same model access at $${savings}/mo less — upgrade to Team when you hit 8+ seats.`;
         isOptimal = false;
     }
 
