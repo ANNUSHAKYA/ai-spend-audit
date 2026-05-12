@@ -77,3 +77,22 @@ justification.
 
 **Plan for tomorrow:** Complete REFLECTION.md, README.md, 
 DEVLOG Day 7 entry, final end-to-end test, submit.
+
+## Day 7 — 2026-05-14
+
+**Hours worked:** 4
+
+**What I did:** Added product name and branding. 
+Added custom favicon. Improved results page hero 
+section with cleaner annual savings display. Added 
+footer. Ran final end-to-end test on live Vercel URL 
+— all flows working. Verified git history spans 5 
+distinct days. Submitted via Google Form.
+
+**What I learned:** Spreading work across days 
+rather than cramming is genuinely better — you catch 
+things on a fresh eye that you miss in a marathon session.
+
+**Blockers / what I'm stuck on:** None — submitted.
+
+**Plan for tomorrow:** Wait for Round 2 notification.
