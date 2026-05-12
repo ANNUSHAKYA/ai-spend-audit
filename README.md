@@ -16,7 +16,7 @@ GitHub Copilot — but haven't done the math yet.
 To add screenshots:
 1. Take them from your live Vercel URL
 2. Drag them into a GitHub issue to get an image URL
-3. Paste the URL here as: ![description](url)
+3. Paste the URL here as: https://ai-spend-audit-sigma.vercel.app/
 
 Screenshot 1: The spend input form
 Screenshot 2: Audit results page with savings hero number
@@ -28,8 +28,7 @@ Screenshot 3: Lead capture form / email confirmation
 
 <img width="1440" height="900" alt="Image" src="https://github.com/user-attachments/assets/a454bc99-ec08-41f9-8c23-d76019571038" />
 
-Or link a Loom/YouTube screen recording (30 seconds):
-[Watch 30-second demo](https://loom.com/your-link)
+
 
 ---
 
@@ -37,7 +36,7 @@ Or link a Loom/YouTube screen recording (30 seconds):
 
 ### Run locally
 ```bash
-git clone https://github.com/yourname/ai-spend-audit
+git clone https://github.com/ANNUSHAKYA/ai-spend-audit
 cd ai-spend-audit
 npm install
 cp .env.example .env.local
@@ -48,11 +47,11 @@ npm run dev
 Open http://localhost:3000
 
 ### Environment variables needed
-NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-ANTHROPIC_API_KEY=your_anthropic_api_key
-RESEND_API_KEY=your_resend_api_key
-NEXT_PUBLIC_APP_URL=https://your-app.vercel.app
+NEXT_PUBLIC_SUPABASE_URL=https://dkggxkhxytnxfmpastmq.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_1TZaPARy44Gb7zNsTXc5Kw_3jEUMwPj
+ANTHROPIC_API_KEY=your-anthropic-api-key-here
+RESEND_API_KEY=re_XB6LbSKE_Mt6htQ4cm9fx6qNYWPfxib7V
+NEXT_PUBLIC_APP_URL=https://ai-spend-audit-sigma.vercel.app
 
 ### Run tests
 ```bash
