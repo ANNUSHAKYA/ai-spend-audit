@@ -140,11 +140,11 @@ const handleSubmit = async () => {
         {/* Header */}
         <div className="mb-8 text-center">
           <h1 className="text-3xl font-bold text-gray-900">
-            AI Spend Audit
-          </h1>
+  SpendLens
+</h1>
           <p className="mt-1 text-sm font-medium text-blue-600">
-            Find out where you&apos;re overspending on AI tools — free, instant, no login required.
-          </p>
+  Free AI Spend Audit
+</p>
         </div>
 
         {/* Tool cards */}
